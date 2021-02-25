@@ -1,4 +1,4 @@
-public class SelectionSort {
+public class InsertionSort {
 
   // common helper methods - start
   public static boolean less (Comparable x, Comparable y) {
@@ -30,14 +30,11 @@ public class SelectionSort {
   public static void sort(Comparable[] a) {
     int N = a.length;
     int exch = 0;
-    for (int i=0; i<N; i++) {
-      int min = i;
-      for (int j = i+1; j<N; j++ ) if (less(a[j], a[min])) min = j;
-      exchange(a, i, min);
-      exch ++;
-      // ??? if (i != min) {exchange(a, i, min); exch ++}
+    for (int i = 1; i < N; i++) {
+      for (int j = i; j > 0 && less(a[j], a[j-1]); j--)
+        exchange(a, j, j-1);
+        exch++;
     }
-
     System.out.println( exch + " Exchanges made");
   }
 

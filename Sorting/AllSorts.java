@@ -102,7 +102,7 @@ public class AllSorts {
   // test client
 
   public static void main (String[] args) {
-    String[] a = StdIn.readStrings();
+    String[] a = StdIn.readAllStrings();
     Comparable[] b;
     //Selection Sort
     b = resetArray(a);
@@ -123,6 +123,17 @@ public class AllSorts {
     b = resetArray(a);
     shellSort(b);
     System.out.println("Is Shell Sorted? " + isSorted(b));
+    // assert isSorted(a);
+    // show(b);
+
+    //Merge Sort - Need the MergeSort file in same directory
+    b = resetArray(a);
+    Instant startmerge = Instant.now();
+    MergeSort.sort(b);
+    Instant finishmerge = Instant.now();
+    long timeElapsedmerge = Duration.between(startmerge, finishmerge).toMillis();
+    System.out.println("Merge Sort: Sort made in " + timeElapsedmerge + "ms");
+    System.out.println("Is Merge Sorted? " + isSorted(b));
     // assert isSorted(a);
     // show(b);
 

@@ -42,7 +42,7 @@ public class InsertionSort {
   // test client
 
   public static void main (String[] args) {
-    String[] a = StdIn.readStrings();
+    String[] a = StdIn.readAllStrings();
     sort(a);
     System.out.println("Is Sorted? " + isSorted(a));
     // assert isSorted(a);

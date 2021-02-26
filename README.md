@@ -21,7 +21,7 @@ Many of these java programs use StdIn (and StdOut is used some places but SrdIn 
  
  
  
-### Files on Folder Sortin under root: 
+### Files on Folder "Sorting" under root: 
    
    ##### java Files:
     note: Need StdIn and StdOut in same directory 

@@ -12,9 +12,9 @@ Many of these java programs use StdIn (and StdOut is used some places but SrdIn 
     - WeightedQuickUnionUF : UF with wighted strategy. input file example union.txt
 
   txt Files:
-    test.txt ==> for Stack and Queue java programs
-    union.txt ==> for WeightedQuickUnionUF.java as input
-    whitelistnums.txt ==> for testing Binary Search java program
+    - test.txt ==> for Stack and Queue java programs
+    - union.txt ==> for WeightedQuickUnionUF.java as input
+    - whitelistnums.txt ==> for testing Binary Search java program
 
  
  
@@ -28,6 +28,6 @@ Many of these java programs use StdIn (and StdOut is used some places but SrdIn 
     - AllSorts - to compare timing sorts from above for same input file (Note: MergeSort file will be required to be in same directory)
 
    txt Files:
-    words.txt: small 9 words file
-    characters.txt: small 11 characters file
-    10000words.txt: large 10000 words file with 1000 unique words repeated 10 times (to get ms level timing)
+    - words.txt: small 9 words file
+    - characters.txt: small 11 characters file
+    - 10000words.txt: large 10000 words file with 1000 unique words repeated 10 times (to get ms level timing)

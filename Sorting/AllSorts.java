@@ -1,3 +1,6 @@
+import java.time.Instant;
+import  java.time.Duration;
+
 public class AllSorts {
 
   // common helper methods - start
@@ -37,6 +40,9 @@ public class AllSorts {
   public static void selectionSort(Comparable[] a) {
     int N = a.length;
     int exch = 0;
+
+    Instant start = Instant.now();
+
     for (int i=0; i<N; i++) {
       int min = i;
       for (int j = i+1; j<N; j++ ) if (less(a[j], a[min])) min = j;
@@ -44,18 +50,53 @@ public class AllSorts {
       exch ++;
       // ??? if (i != min) {exchange(a, i, min); exch ++}
     }
-    System.out.println("Selection Sort: "+ exch + " Exchanges made");
+    Instant finish = Instant.now();
+    long timeElapsed = Duration.between(start, finish).toMillis();
+    System.out.println("Selection Sort: "+ exch + " Exchanges made in " + timeElapsed + "ms");
   }
 
   public static void insertionSort(Comparable[] a) {
     int N = a.length;
     int exch = 0;
+
+    Instant start = Instant.now();
+
     for (int i = 1; i < N; i++) {
       for (int j = i; j > 0 && less(a[j], a[j-1]); j--)
         exchange(a, j, j-1);
         exch++;
     }
-    System.out.println("Insertion Sort: " +  exch + " Exchanges made");
+
+    Instant finish = Instant.now();
+    long timeElapsed = Duration.between(start, finish).toMillis();
+    System.out.println("Insertion Sort: " +  exch + " Exchanges made in " + timeElapsed + "ms");
+  }
+
+  public static void shellSort (Comparable[] a) {
+    int N = a.length;
+    int exch = 0;
+    int h = 1;
+    while (h < N/3) h = h*3 + 1;
+
+    Instant start = Instant.now();
+    // CODE HERE
+
+    // outer loop for all h values till 1
+    while (h >= 1) {
+      // h-sort outer loop
+      for (int i = h; i < N; i++) {
+        // checking and exhanging within given h inner loop
+        for (int j = i; j >= h && less(a[j], a[j-h]); j -= h)
+          {exchange(a, j, j-h); exch++;}
+        // end inner loop for given h
+      }
+      // end outer h loop
+      h = h / 3;
+    }
+    // end loop for all h values
+    Instant finish = Instant.now();
+    long timeElapsed = Duration.between(start, finish).toMillis();
+    System.out.println("Shell Sort: " + exch + " Exchanges made in " + timeElapsed + "ms");
   }
 
   // test client
@@ -66,16 +107,24 @@ public class AllSorts {
     //Selection Sort
     b = resetArray(a);
     selectionSort(b);
+    // System.out.println(a.length);
     System.out.println("Is Selection Sorted? " + isSorted(b));
     // assert isSorted(a);
-    show(b);
+    // show(b);
 
     //Insetion Sort
     b = resetArray(a);
     insertionSort(b);
     System.out.println("Is Insertion Sorted? " + isSorted(b));
     // assert isSorted(a);
-    show(b);
+    // show(b);
+
+    //Shell Sort
+    b = resetArray(a);
+    shellSort(b);
+    System.out.println("Is Shell Sorted? " + isSorted(b));
+    // assert isSorted(a);
+    // show(b);
 
   }
 

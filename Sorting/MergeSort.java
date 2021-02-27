@@ -2,15 +2,9 @@ public class MergeSort {
 
   private static Comparable[] aux;
 
-  // common helper methods - start
+  // ** common helper methods - start
   public static boolean less (Comparable x, Comparable y) {
     return x.compareTo(y) < 0;
-  }
-
-  public static void exchange (Comparable[] a, int i, int j) {
-    Comparable temp = a[i];
-    a[i] = a[j];
-    a[j] = temp;
   }
 
   public static void show (Comparable [] a) {
@@ -28,7 +22,14 @@ public class MergeSort {
   }
   // common helper methods - end
 
-  //merge methods
+  // ** Reseting / copying from unsorted array before applying different sorting method
+  public static Comparable[] resetArray (Comparable[] a) {
+    Comparable[] b = new String[a.length];
+    for (int i=0; i<a.length; i++) b[i] = a[i];
+    return b;
+  }
+
+  // ** merge method --
 
   public static void merge (Comparable[] a, int lo, int mid, int hi) {
     int i =lo;
@@ -45,7 +46,7 @@ public class MergeSort {
 
   }
 
-  // Sort specific methods.
+  // ** Sort specific methods.
 
   public static void sort (Comparable []a ) {
     aux = new Comparable[a.length];
@@ -61,15 +62,39 @@ public class MergeSort {
     merge(a, lo, mid, hi); // merge initializes   mid+1
   }
 
+  // ** Non-recursive  Bottomup Merge
+  public static void sortBU (Comparable[]a) {
+    int N = a.length;
+    aux = new Comparable [N];
 
-  // test client
+    // outer  loop for sz 1, 2, 4
+    for (int sz = 1; sz < N; sz = sz+sz) {
+      // inner loop for particular sz value to traverse the array
+      for (int lo = 0; lo < N - sz; lo += sz + sz)
+          merge(a, lo, lo+sz-1, Math.min(lo+sz+sz-1, N-1) );
+    }
+  }
+
+
+  // ****** test client ********
 
   public static void main (String[] args) {
-    String[] a = StdIn.readAllStrings();
-    sort(a);
-    System.out.println("Is Sorted? " + isSorted(a));
+    Comparable[] a = StdIn.readAllStrings();
+
+    Comparable[] b;
+    //** Recursive Merge Sort
+    b = resetArray(a);
+    sort(b);
+    System.out.println("Is Sorted? " + isSorted(b));
     // assert isSorted(a);
-    show(a);
+    // show(b);
+
+    //** Bottom up Merge Sort
+    b = resetArray(a);
+    sortBU(b);
+    System.out.println("Is Bottom up Sorted? " + isSorted(b));
+    // assert isSorted(a);
+    // show(b);
   }
 
   // NOTE : Comparable type works without custom compareTo method for primitive types

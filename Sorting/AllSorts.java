@@ -29,13 +29,14 @@ public class AllSorts {
   }
   // common helper methods - end
 
-  // Sort specific methods.
-
+  // Reseting / copying from unsorted array before applying different sorting method
   public static Comparable[] resetArray (Comparable[] a) {
     Comparable[] b = new String[a.length];
     for (int i=0; i<a.length; i++) b[i] = a[i];
     return b;
   }
+
+  // Sort specific methods.
 
   public static void selectionSort(Comparable[] a) {
     int N = a.length;
@@ -102,7 +103,7 @@ public class AllSorts {
   // test client
 
   public static void main (String[] args) {
-    String[] a = StdIn.readAllStrings();
+    Comparable[] a = StdIn.readAllStrings();
     Comparable[] b;
     //Selection Sort
     b = resetArray(a);
@@ -134,6 +135,17 @@ public class AllSorts {
     long timeElapsedmerge = Duration.between(startmerge, finishmerge).toMillis();
     System.out.println("Merge Sort: Sort made in " + timeElapsedmerge + "ms");
     System.out.println("Is Merge Sorted? " + isSorted(b));
+    // assert isSorted(a);
+    // show(b);
+
+    //Merge Sort BU ( bottom up) - Need the MergeSort file in same directory
+    b = resetArray(a);
+    Instant startmergeBU = Instant.now();
+    MergeSort.sortBU(b);
+    Instant finishmergeBU = Instant.now();
+    long timeElapsedmergeBU = Duration.between(startmergeBU, finishmergeBU).toMillis();
+    System.out.println("Bottom Up Merge Sort: Sort made in " + timeElapsedmergeBU + "ms");
+    System.out.println("Is Bottom Up Merge Sorted? " + isSorted(b));
     // assert isSorted(a);
     // show(b);
 
